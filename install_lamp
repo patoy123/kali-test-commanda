@@ -7,6 +7,11 @@ mysql_secure_installation
 apt install curl -y
 curl -fsSL https://tailscale.com/install.sh | sh
 tailscale up
+/usr/sbin/pct stop 101
+nano /etc/pve/lxc/101.conf
+lxc.cgroup2.devices.allow: c 10:200 rwm
+lxc.mount.entry: /dev/net/tun dev/net/tun none bind,create=file
+/usr/sbin/pct start 101
 
 apt install -y nodejs npm
 ===================== TAILSCALE START ========================
